@@ -2,7 +2,7 @@
 # Instance Methods
 
 ## Introduction
-Now that we know what classes and instances are, we can start to talk about instance methods. Instance methods are almost the same as a regular function in python. The key difference is that an instance method is defined inside of a class and bound to intance objects of that class. Instance methods can be thought of an attribute of an instance object. The difference bethween an instance method and another attribute of an instance, is that instance methods are `callable`, meaning they execute a block of code. This may seem a bit confusing, but try to think about instance methods as functions defined in a class that are really just attributes of an instance object from that class.
+Now that we know what classes and instances are, we can start to talk about instance methods. Instance methods are almost the same as regular functions in python. The key difference is that an instance method is defined inside of a class and bound to intance objects of that class. Instance methods can be thought of an attribute of an instance object. The difference bethween an instance method and another attribute of an instance, is that instance methods are `callable`, meaning they execute a block of code. This may seem a bit confusing, but try to think about instance methods as functions defined in a class that are really just attributes of an instance object from that class.
 
 ## Objectives
 * Understanding instance methods as attributes
@@ -18,10 +18,6 @@ Let's see how we would create a single dog, `rex`, and get him to bark:
 
 ```python
 class Dog():
-    
-    def poop(self):
-        return "poop"
-
 
 rex = Dog()
 rex
@@ -39,22 +35,22 @@ Okay, here we have an instance of the dog class, but as we can see rex cannot ba
 
 ```python
 def make_a_bark():
-    return "bark!"
+    return "ruff ruff!"
 
 rex.bark = make_a_bark
 rex.bark
 ```
 
-Here we can see that we successfully added an attribute to `rex`, the **method** `bark`, and assigned it to the function `make_a_bark`. Note that the return value is simply a function signature since we have not yet executed the function, and although this looks like an instance method it is not.
+Here we can see that we successfully added a the `bark` attribute to `rex` and assigned it the function `make_a_bark`. Note that the return value of `rex.bark` is simply a function signature since we have not yet executed the function, and although this looks like an instance method it is not quite.
 
-> **Note:** Although you may hear and see the terms method and function used interchangeably, there are slight differences. We know that function is essentially an object that contains a block of code and it can optionally take in data or objects as explicit parameters, operate on them, and optionally return a value. A method is, simply put, a function that is bound to a class or instances of that class. Instance methods, thus, are essentially functions that are available/bound to instance objects of the class in which they are defined. However, a key difference between the two is that a method is *implicitly* passed the object on which it is called, meaning the first parameter for the method is the object. Don't worry if this is confusing as we will dive more into this later.
+> **Note:** Although you may hear and see the terms method and function used interchangeably, there are slight differences. We know that function is essentially an object that contains a block of code and it can optionally take in data or objects as explicit parameters, operate on them, and optionally return a value. A method is, simply put, a function that is bound to a class or instances of that class. Instance methods, thus, are functions that are available/bound to instance objects of the class in which they are defined. However, a key difference between the two is that a method is *implicitly* passed the object on which it is called, meaning the first parameter for the method is the object. Don't worry if this is confusing as we will dive more into this later.
 
 
 ```python
 rex.bark()
 ```
 
-Great, now we see that once we **called** the `bark` attribute, we executed the function and now see our return value, `"bark!"`. 
+Great, now we see that once we **called** the `bark` attribute, we executed the function and now see our return value, `"ruff ruff!"`. 
 
 This is a great first step. However, since `make_a_bark` is not actually defined inside our class, we are able to call it without our dog instance object, `rex`, and as we just covered, that's not really how instance methods work... 
 
@@ -72,7 +68,7 @@ Alright, so, how do we turn this into a real instance method? Well, the first th
 class Dog():
     
     def bark():
-        return "I'm an instance method! Oh and... bark!"
+        return "I'm an instance method! Oh and... ruff ruff!"
 ```
 
 
@@ -82,7 +78,7 @@ new_rex = Dog()
 new_rex.bark
 ```
 
-Here, we have re-defined our Dog class, but we have defined a *method* bark. Now, whenever we create a new instance of this new Dog class, that instance will have the bark instance method as an attribute. 
+Here, we have re-defined our Dog class, but this time we actually defined an *instance method* `bark`. Now, whenever we create a new instance of this new Dog class, that instance will have the bark instance method as an attribute. 
 
 Notice that the signature that is returned by the unexecuted method says **bound `method`** instead of function, as was the case with our first `rex`'s bark. 
 
@@ -94,7 +90,7 @@ new_rex = Dog()
 new_rex.bark()
 ```
 
-Uh oh! `TypeError: bark() takes 0 positional arguments but 1 was given`. This error is telling us that the method, `bark` was defined to take 0 arguments, but when we executed it, we have it an argument. 
+Uh oh! `TypeError: bark() takes 0 positional arguments but 1 was given`. This error is telling us that the method, `bark` was defined to take 0 arguments, but when we executed it, we gave it an argument. 
 
 Remember when we said one of the key differences between functions and methods is that a method is bound to an object and **implicitly** passes the object as a argumet? Well, that is what is causing our error. Effectively, what is happening when we try to call the instance method is this:
 
@@ -156,7 +152,7 @@ print("4.", newest_rex == newest_rex.who_am_i())
 # again asserting that `self` is equal to the instance object on which who_am_i was called
 ```
 
-Again, don't worry if `self` still seems a bit confusing. It will become clearer through practice and it will also be very useful as we get further into object oriented programming. For now, we can just go forward with the knowledge that to define an instance method and later call it on an instance object, we will need to include at least one parameter.
+Again, don't worry if `self` still seems a bit confusing. It will become clearer through practice and it will also be very useful as we get further into object oriented programming. For now, we can just go forward with the knowledge that **to define an instance method and later call it on an instance object, we will need to include at least one parameter in the method definition**.
 
 ## Summary
 
